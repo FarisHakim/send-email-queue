@@ -13,7 +13,7 @@ use App\Mail\TestEmail;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/api', 'App\Http\Controllers\UserController@getDataApi');
 Route::get('/country', 'App\Http\Controllers\UserController@getNationality');
 Route::get('/age', 'App\Http\Controllers\UserController@getAge');
+Route::get('/sendemail','App\Http\Controllers\UserController@sendEmail');
 

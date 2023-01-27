@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Http;
 use App\Models\Nationality;
 use App\Models\Age;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TestEmail;
 
 class UserController extends Controller
 {
@@ -52,5 +54,9 @@ class UserController extends Controller
             $nationalitys['id_country']=$data[$i]->country[0]->country_id;
             Nationality::insert([$nationalitys]);
         }
+    }
+     public function sendEmail(){
+        $emails=User::pluck('email')->take(3);
+        Mail::to($emails)->send(new TestEmail);    
     }
 }
