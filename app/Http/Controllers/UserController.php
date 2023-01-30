@@ -15,7 +15,7 @@ class UserController extends Controller
 {
     public function getAllName()
     {
-        $name=User::pluck('firstname','id');
+        $name=User::pluck('firstname','id')->take(10);
         return $name;
     }
     public function getDataApi($url){
@@ -56,7 +56,15 @@ class UserController extends Controller
         }
     }
      public function sendEmail(){
-        $emails=User::pluck('email')->take(3);
-        Mail::to($emails)->send(new TestEmail);    
+        $message=$email=array();
+        $user=User::with('age','nationality')->get();
+        foreach ($user as $key => $value) {
+            $email=$value->email;
+            $message['name']=$value->fullname;
+            $message['address']=$value->address;
+            $message['age']=$value->age->age;
+            $message['country']=$value->nationality->id_country;
+            Mail::to($email)->send(new TestEmail($message));
+        }    
     }
 }

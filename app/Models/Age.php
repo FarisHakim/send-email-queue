@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Age extends Model
 {
-    use HasFactory;
-    
+    public $keyType = 'string';
+    public $incrementing = false;
+    protected $table= 'ages';
     protected $fillable = [
         'id',
         'id_user',
@@ -17,8 +18,8 @@ class Age extends Model
         'created_at'
     ];
 
-    public function user(): BelongsTo
+    public function user()
     {
-        return $this->belongsTo(User::class, 'id_user', 'id');
+        return $this->belongsTo(User::class,'id_user','id');
     }
 }

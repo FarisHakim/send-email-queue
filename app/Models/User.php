@@ -13,6 +13,10 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    protected $table= 'users';
+    public $keyType = 'string';
+    public $incrementing = false;
+
     protected $fillable = [
         'id',
         'fullname',
@@ -30,14 +34,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     
-    public function age(): HasOne
+    public function age()
     {
-        return $this->hasOne(Age::class, 'id', 'id_user');
+        return $this->hasOne(Age::class,'id_user','id');
     }
     
-    public function nationality(): HasOne
+    public function nationality()
     {
-        return $this->hasOne(Nationality::class, 'id', 'id_user');
+        return $this->hasOne(Nationality::class,'id_user','id');
     }
 
 }

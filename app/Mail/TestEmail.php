@@ -6,20 +6,21 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Content;
 
 class TestEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $mailData;
+    public $message;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($message)
     {
-
+        $this->message = $message;
     }
 
     /**
@@ -29,6 +30,6 @@ class TestEmail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Test Notification')->view('testemail');
+        return $this->view('testemail')->with('data',$this->message);
     }
 }
