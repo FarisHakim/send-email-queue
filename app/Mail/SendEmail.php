@@ -8,7 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Content;
 
-class TestEmail extends Mailable
+class SendEmail extends Mailable
 {
     use Queueable, SerializesModels;
 

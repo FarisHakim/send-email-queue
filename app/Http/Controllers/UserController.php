@@ -9,7 +9,8 @@ use App\Models\Nationality;
 use App\Models\Age;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\TestEmail;
+use App\Mail\SendEmail;
+use App\Jobs\SendMailJob;
 
 class UserController extends Controller
 {
@@ -64,7 +65,7 @@ class UserController extends Controller
             $message['address']=$value->address;
             $message['age']=$value->age->age;
             $message['country']=$value->nationality->id_country;
-            Mail::to($email)->send(new TestEmail($message));
+            dispatch(new SendMailJob($email,$message));
         }    
     }
 }
