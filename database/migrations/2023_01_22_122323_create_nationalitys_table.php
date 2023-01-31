@@ -18,6 +18,7 @@ class CreateNationalitysTable extends Migration
             $table->string('id_country');
             $table->uuid('id_user');
             $table->timestamps();
+            $table->index(['id_user','id_country']);
         });
     }
 

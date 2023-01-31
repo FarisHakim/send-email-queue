@@ -19,6 +19,7 @@ class CreateAgesTable extends Migration
             $table->integer('age');
             $table->integer('count');
             $table->timestamps();
+            $table->index(['id_user','age']);
         });
     }
 

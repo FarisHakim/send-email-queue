@@ -16,7 +16,7 @@ class UserController extends Controller
 {
     public function getAllName()
     {
-        $name=User::pluck('firstname','id'); 
+        $name=User::pluck('firstname','id');//using pluck for get only 2 column
         return $name;
     }
     public function getDataApi($url){
