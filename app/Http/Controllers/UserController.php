@@ -16,7 +16,7 @@ class UserController extends Controller
 {
     public function getAllName()
     {
-        $name=User::pluck('firstname','id')->take(10);
+        $name=User::pluck('firstname','id'); 
         return $name;
     }
     public function getDataApi($url){
@@ -57,6 +57,10 @@ class UserController extends Controller
         }
     }
      public function sendEmail(){
+        //call function for get api and insert into db
+        $this->getAge();
+        $this->getNationality();
+        
         $message=$email=array();
         $user=User::with('age','nationality')->get();
         foreach ($user as $key => $value) {
